@@ -73,6 +73,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-supervisor" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/My-Blog/2025/02/24/supervisor/" class="article-date">
+  <time class="dt-published" datetime="2025-02-24T03:00:00.000Z" itemprop="datePublished">2025-02-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/My-Blog/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/My-Blog/2025/02/24/supervisor/">supervisor--进程管理控制工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>​	Supervisor是一个进程控制系统主要用于在类UNIX操作系统（如 Linux、macOS）上管理和监控后台进程。它允许用户启动、停止、重启和自动管理多个进程,特别适用于守护进程（Daemon）的管理。</p>
+<h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><ul>
+<li>进程管理：可启动、停止、重启和监视进程。</li>
+<li>自动重启：进程异常退出时可自动重启。</li>
+<li>日志管理：可捕获进程的标准输出和错误输出，便于调试。</li>
+<li>分层管理：支持不同用户和权限的进程管理。</li>
+<li>远程控制：提供 supervisorctl 命令行工具，可远程管理进程。</li>
+</ul>
+<h2 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h2><p>supervisord：Supervisor 的守护进程，负责管理子进程。<br>supervisorctl：命令行工具，用于与 supervisord 交互。<br>配置文件：一般位于 &#x2F;etc&#x2F;supervisord.conf 或 &#x2F;etc&#x2F;supervisor&#x2F;supervisord.conf，用于定义要管理的进程。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="安装-Supervisor"><a href="#安装-Supervisor" class="headerlink" title="安装 Supervisor"></a>安装 Supervisor</h3><p><strong>Ubuntu 安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt install supervisor</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置Supervisor"><a href="#配置Supervisor" class="headerlink" title="配置Supervisor"></a>配置Supervisor</h3><p>创建或修改 Supervisor 配置文件（一般在 &#x2F;etc&#x2F;supervisor&#x2F;conf.d&#x2F; 目录）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[program:myapp]</span><br><span class="line">command=/path/to/your/app</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">stderr_logfile=/var/log/myapp.err.log</span><br><span class="line">stdout_logfile=/var/log/myapp.out.log</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动-Supervisor"><a href="#启动-Supervisor" class="headerlink" title="启动 Supervisor"></a>启动 Supervisor</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable supervisor</span><br><span class="line">sudo systemctl start supervisor</span><br></pre></td></tr></table></figure>
+
+<h3 id="管理进程"><a href="#管理进程" class="headerlink" title="管理进程"></a>管理进程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo supervisorctl status  # 查看进程状态</span><br><span class="line">sudo supervisorctl start myapp  # 启动指定进程</span><br><span class="line">sudo supervisorctl stop myapp  # 停止进程</span><br><span class="line">sudo supervisorctl restart myapp  # 重启进程</span><br></pre></td></tr></table></figure>
+
+<h2 id="Supervisor参数"><a href="#Supervisor参数" class="headerlink" title="Supervisor参数"></a>Supervisor参数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">[program:account-center] #定义守护进程</span><br><span class="line"></span><br><span class="line">directory = /data/server/account-center/ #指定运行程序时切换的目录</span><br><span class="line"></span><br><span class="line">command = /usr/bin/java -Xms1024m -Xmx1024m -XX:+UseConcMarkSweepGC -jar account-api.jar --ss.profile=prd,file --ss.pwd=tagesIxaLZx3r4rEvIDYt50pax --ss.eurl=&quot;http://eureka:tagesIxaLZx3r4rEvIDYt50pax@10.148.0.5:8761/eureka,http:/ /eureka:tagesIxaLZx3r4rEvIDYt50pax@10.148.0.6:8761/eureka&quot; #启动程序使用的命令 umask = 022 #进程的umask</span><br><span class="line"></span><br><span class="line">autostart = true #true表示，supervisord启动的时候，进程会自动启动</span><br><span class="line"></span><br><span class="line">autorestart = true #true表示，进程会随supervisord的重启而重启</span><br><span class="line"></span><br><span class="line">startsecs = 5 #程序启动后多久任务程序启动成功，默认为10S startretries = 3 #supervisord尝试启动程序的次数，默认为3</span><br><span class="line"></span><br><span class="line">exitcodes = 0,2 #预期的推出返回码</span><br><span class="line"></span><br><span class="line">stopsignal = TERM #收到stop请求的时候，发送给程序，默认为TERM</span><br><span class="line"></span><br><span class="line">stopwaitsecs = 30 #在操作系统给supervisord发送SIGCHILD信号时等待时间</span><br><span class="line"></span><br><span class="line">stopasgroup = false #主要用于supervisord管理的子进程，该进程本身也有子进程，只处理supervisord的子进程。子进程的子进程会变成孤儿就能成，设置该选项，把整个该子进程的整个进程组干掉。发送的是stop信号</span><br><span class="line"></span><br><span class="line">killasgroup = false #与stopasgroup 类似，发送的时kill信号</span><br><span class="line"></span><br><span class="line">user = root #supervisord在以root运行时，使用此用户启动子程序</span><br><span class="line"></span><br><span class="line">redirect_stderr = true #设置为true时，进程则会把标准错误输出到supervisord后台的标砖输出文件描述</span><br><span class="line"></span><br><span class="line">stdout_logfile = /data/server/account-center/logs/stdout.log #进程的标准输出文件路径，没有设置或设置为AUTO，则会自动选择一个文件位置</span><br><span class="line"></span><br><span class="line">stdout_logfile_maxbytes = 500MB #标准输出log文件达到多少自动轮转</span><br><span class="line"></span><br><span class="line">stdout_logfile_backups = 10 #标准输出日志轮转的数量</span><br><span class="line"></span><br><span class="line">stdout_capture_maxbytes = 500MB #当进程处于stderr capture mode模式下，写入FIFP队列的最大bytes值</span><br><span class="line"></span><br><span class="line">stdout_events_enabled = false #设置为true，进程在写它的stderr</span><br><span class="line"></span><br><span class="line">stderr_logfile = /data/server/account-center/logs/stderr.log #把进程的错误日志输出至一个文件中</span><br><span class="line"></span><br><span class="line">stderr_logfile_maxbytes = 500MB #错误日志输出达到多少自动轮转</span><br><span class="line"></span><br><span class="line">stderr_logfile_backups = 10 #错误日志轮转的数量</span><br><span class="line"></span><br><span class="line">stderr_capture_maxbytes=500MB #当进程处于stderr capture mode模式下，写入FIFP队列的最大bytes值</span><br><span class="line"></span><br><span class="line">stderr_events_enabled=false #如果设置为true，当进程在写他的stderr到文件中描述符的时候,PROCESS_LOG_STDERR事件被触发</span><br><span class="line"></span><br><span class="line">serverurl=AUTO #是否允许子进程和内部的HTTP服务通讯，如果设置为AUTO, supervisord会自动的构建一个url</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://anthonywangjing.github.io/2025/02/24/supervisor/" data-id="cm7ihfox70001eso55bxud6wv" data-title="supervisor--进程管理控制工具" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/My-Blog/tags/%E6%9D%82%E9%A1%B9/" rel="tag">杂项</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hxeo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/My-Blog/2025/02/24/hxeo/" class="article-date">
@@ -204,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anthonywangjing.github.io/2025/02/24/hxeo/" data-id="cm7igxczj00005go596vt82wt" data-title="hexo 部署" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="https://anthonywangjing.github.io/2025/02/24/hxeo/" data-id="cm7ihfox20000eso50l6s5ctu" data-title="hexo 部署" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -268,6 +333,10 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/My-Blog/2025/02/24/supervisor/">supervisor--进程管理控制工具</a>
+          </li>
         
           <li>
             <a href="/My-Blog/2025/02/24/hxeo/">hexo 部署</a>
